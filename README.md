@@ -47,47 +47,51 @@ const rpc = new JsonRpc(endpoint, { fetch, chain: "eos" })
     -   [Examples](#examples)
     -   [get_account](#get_account)
         -   [Parameters](#parameters-1)
-    -   [get_balances](#get_balances)
+    -   [get_account_info](#get_account_info)
         -   [Parameters](#parameters-2)
-    -   [get_key_accounts](#get_key_accounts)
+    -   [get_balances](#get_balances)
         -   [Parameters](#parameters-3)
+    -   [get_key_accounts](#get_key_accounts)
+        -   [Parameters](#parameters-4)
     -   [get_networks](#get_networks)
     -   [get_sync_info](#get_sync_info)
     -   [get_token_balance](#get_token_balance)
-        -   [Parameters](#parameters-4)
-    -   [get_topholders](#get_topholders)
         -   [Parameters](#parameters-5)
+    -   [get_topholders](#get_topholders)
+        -   [Parameters](#parameters-6)
     -   [get_usercount](#get_usercount)
     -   [get_topram](#get_topram)
-        -   [Parameters](#parameters-6)
-    -   [get_topstake](#get_topstake)
         -   [Parameters](#parameters-7)
-    -   [get_codehash](#get_codehash)
+    -   [get_topstake](#get_topstake)
         -   [Parameters](#parameters-8)
-    -   [get_tokenholder_count](#get_tokenholder_count)
+    -   [get_codehash](#get_codehash)
         -   [Parameters](#parameters-9)
+    -   [get_tokenholder_count](#get_tokenholder_count)
+        -   [Parameters](#parameters-10)
 -   [JsonRpc](#jsonrpc-1)
     -   [get_account](#get_account-1)
-        -   [Parameters](#parameters-10)
-    -   [get_balances](#get_balances-1)
         -   [Parameters](#parameters-11)
-    -   [get_key_accounts](#get_key_accounts-1)
+    -   [get_account_info](#get_account_info-1)
         -   [Parameters](#parameters-12)
+    -   [get_balances](#get_balances-1)
+        -   [Parameters](#parameters-13)
+    -   [get_key_accounts](#get_key_accounts-1)
+        -   [Parameters](#parameters-14)
     -   [get_networks](#get_networks-1)
     -   [get_sync_info](#get_sync_info-1)
     -   [get_token_balance](#get_token_balance-1)
-        -   [Parameters](#parameters-13)
+        -   [Parameters](#parameters-15)
     -   [get_topholders](#get_topholders-1)
-        -   [Parameters](#parameters-14)
+        -   [Parameters](#parameters-16)
     -   [get_usercount](#get_usercount-1)
     -   [get_topram](#get_topram-1)
-        -   [Parameters](#parameters-15)
-    -   [get_topstake](#get_topstake-1)
-        -   [Parameters](#parameters-16)
-    -   [get_codehash](#get_codehash-1)
         -   [Parameters](#parameters-17)
-    -   [get_tokenholder_count](#get_tokenholder_count-1)
+    -   [get_topstake](#get_topstake-1)
         -   [Parameters](#parameters-18)
+    -   [get_codehash](#get_codehash-1)
+        -   [Parameters](#parameters-19)
+    -   [get_tokenholder_count](#get_tokenholder_count-1)
+        -   [Parameters](#parameters-20)
 -   [Error](#error)
 -   [Error](#error-1)
 
@@ -117,6 +121,18 @@ Retrieve all token balances, resources and authorization information for an acco
 -   `accountName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name of account
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetAccount>** account
+
+#### get_account_info
+
+[GET /api/accinfo]
+
+Retrieve all resources and authorization information for an account:
+
+##### Parameters
+
+-   `accountName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name of account
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetAccountInfo>** account
 
 #### get_balances
 
@@ -257,6 +273,18 @@ Retrieve all token balances, resources and authorization information for an acco
 -   `accountName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name of account
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetAccount>** account
+
+#### get_account_info
+
+[GET /api/accinfo]
+
+Retrieve all resources and authorization information for an account:
+
+##### Parameters
+
+-   `accountName` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** name of account
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetAccountInfo>** account
 
 #### get_balances
 

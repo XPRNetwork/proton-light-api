@@ -1,4 +1,5 @@
 export const GET_ACCOUNT = "/api/account";
+export const GET_ACCOUNT_INFO = "/api/accinfo";
 export const GET_BALANCES = "/api/balances";
 export const GET_KEY_ACCOUNTS = "/api/key";
 export const GET_NETWORKS = "/api/networks";

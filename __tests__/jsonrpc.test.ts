@@ -9,6 +9,11 @@ test("jsonrpc.get_account", async () => {
     expect(!!response).toBeTruthy();
 });
 
+test("jsonrpc.get_account_info", async () => {
+    const response = await rpc.get_account_info('eoscafeblock');
+    expect(!!response).toBeTruthy();
+});
+
 test("jsonrpc.get_balances", async () => {
     const response = await rpc.get_balances("eoscafeblock");
     expect(!!response).toBeTruthy();

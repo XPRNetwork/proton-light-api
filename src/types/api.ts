@@ -9,6 +9,14 @@ export interface GetAccount {
     linkauth: Linkauth[];
 }
 
+export interface GetAccountInfo {
+    account_name: string;
+    chain: ChainInfo;
+    delegated_from: DelegatedFrom[];
+    delegated_to: DelegatedTo[];
+    linkauth: Linkauth[];
+}
+
 export interface GetBalances {
     account_name: string;
     balances: Balance[];
