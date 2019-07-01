@@ -23,7 +23,7 @@ const { JsonRpc } = require("@eoscafe/light-api")
 const fetch = require("isomorphic-fetch")
 
 const endpoint = "https://api.light.xeos.me"
-const rpc = new JsonRpc(endpoint, { fetch })
+const rpc = new JsonRpc(endpoint, { fetch, chain: "eos" })
 ```
 
 **TypeScript**
@@ -33,7 +33,7 @@ import { JsonRpc } from "@eoscafe/light-api"
 import fetch from "isomorphic-fetch"
 
 const endpoint = "https://api.light.xeos.me"
-const rpc = new JsonRpc(endpoint, { fetch })
+const rpc = new JsonRpc(endpoint, { fetch, chain: "eos" })
 ```
 
 ## ENV Variables
@@ -127,7 +127,7 @@ JsonRpc
 
 ```javascript
 const endpoint = "https://api.light.xeos.me"
-const rpc = new JsonRpc(endpoint, { fetch })
+const rpc = new JsonRpc(endpoint, { fetch, chain: "eos" })
 ```
 
 #### get_account
@@ -168,11 +168,11 @@ Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 #### get_networks
 
-[GET /api/key]
+[GET /api/networks]
 
 Retrieve all accounts in all known EOS networks dependent on a public key:
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetKeyAccounts>** accounts
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetNetworks>** accounts
 
 #### get_sync_info
 
@@ -308,11 +308,11 @@ Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 #### get_networks
 
-[GET /api/key]
+[GET /api/networks]
 
 Retrieve all accounts in all known EOS networks dependent on a public key:
 
-Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetKeyAccounts>** accounts
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetNetworks>** accounts
 
 #### get_sync_info
 

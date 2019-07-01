@@ -25,7 +25,7 @@ declare const global: any;
  * @example
  *
  * const endpoint = "https://api.light.xeos.me"
- * const rpc = new JsonRpc(endpoint, { fetch })
+ * const rpc = new JsonRpc(endpoint, { fetch, chain: "eos" })
  */
 export class JsonRpc {
   public endpoint: string;
@@ -125,11 +125,11 @@ export class JsonRpc {
     }
 
     /**
-     * [GET /api/key]
+     * [GET /api/networks]
      *
      * Retrieve all accounts in all known EOS networks dependent on a public key:
      *
-     * @returns {Promise<GetKeyAccounts>} accounts
+     * @returns {Promise<GetNetworks>} accounts
      */
     public get_networks() {
       return this.get<GetNetworks>(GET_NETWORKS);
