@@ -10,10 +10,11 @@ import {
   GET_TOPRAM,
   GET_TOPSTAKE,
   GET_CODEHASH,
-  GET_TOKEN_HOLDER_COUNT
+  GET_TOKEN_HOLDER_COUNT,
+  GET_ACCOUNT_INFO
 } from "./endpoints";
 import { RpcError, RpcStatusError } from "./rpcerror";
-import { GetAccount, GetBalances, GetKeyAccounts, GetNetworks, GetTopHolders, GetTopRam, GetTopStake, GetCodehash } from './types/api';
+import { GetAccount, GetBalances, GetKeyAccounts, GetNetworks, GetTopHolders, GetTopRam, GetTopStake, GetCodehash, GetAccountInfo } from './types/api';
 
 export type Fetch = (url: string | Request, init?: RequestInit) => Promise<Response>;
 declare const global: any;
@@ -96,6 +97,19 @@ export class JsonRpc {
     public get_account(accountName: string) {
       const url = `${GET_ACCOUNT}/${this.chain}/${accountName}`
       return this.get<GetAccount>(url);
+    }
+
+    /**
+     * [GET /api/accinfo]
+     *
+     * Retrieve all resources and authorization information for an account: 
+     *
+     * @param {string} accountName name of account
+     * @returns {Promise<GetAccountInfo>} account
+     */
+    public get_account_info(accountName: string) {
+      const url = `${GET_ACCOUNT_INFO}/${this.chain}/${accountName}`
+      return this.get<GetAccountInfo>(url);
     }
 
     /**
