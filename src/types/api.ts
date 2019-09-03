@@ -1,4 +1,4 @@
-import { Balance, ChainInfo, DelegatedFrom, DelegatedTo, Linkauth, Permission, CodehashInfo } from './common';
+import { Balance, ChainInfo, DelegatedFrom, DelegatedTo, Linkauth, Permission, CodehashInfo } from "./common";
 
 export interface GetAccount {
     account_name: string;
@@ -27,7 +27,7 @@ export interface GetKeyAccounts {
     [key: string]: {
         chain: ChainInfo;
         accounts: {
-            [key: string]: Permission[]
+            [key: string]: Permission[];
         }
     };
 }
@@ -35,14 +35,14 @@ export interface GetKeyAccounts {
 export type GetNetworks = ChainInfo[];
 export type GetTopHolders = string[][];
 
-export type GetTopRam = (string|number)[][]
-export type GetTopStake = (string|number|number)[][]
+export type GetTopRam = Array<Array<(string|number)>>;
+export type GetTopStake = Array<Array<(string|number|number)>>;
 
 export interface GetCodehash {
     [key: string]: {
         chain: ChainInfo;
         accounts: {
-            [key: string]: CodehashInfo
+            [key: string]: CodehashInfo,
         }
     };
 }

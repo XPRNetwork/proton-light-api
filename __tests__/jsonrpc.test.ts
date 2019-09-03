@@ -1,16 +1,15 @@
 import fetch from "isomorphic-fetch";
 import { JsonRpc } from "../";
 
-const endpoint = process.env.LIGHTAPI_ENDPOINT || "https://api.light.xeos.me";
-const rpc = new JsonRpc(endpoint, { fetch });
+const rpc = new JsonRpc("eos", { fetch });
 
 test("jsonrpc.get_account", async () => {
-    const response = await rpc.get_account('eoscafeblock');
+    const response = await rpc.get_account("eoscafeblock");
     expect(!!response).toBeTruthy();
 });
 
 test("jsonrpc.get_account_info", async () => {
-    const response = await rpc.get_account_info('eoscafeblock');
+    const response = await rpc.get_account_info("eoscafeblock");
     expect(!!response).toBeTruthy();
 });
 
