@@ -1,14 +1,22 @@
 {
   "name": "@eoscafe/light-api",
+<<<<<<< HEAD
   "version": "1.0.0",
+=======
+  "version": "3.2.4",
+>>>>>>> 9b1dbf1992b305852f421f20624ff4abddb183b2
   "description": "Light API HTTP Javascript library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prepublishOnly": "tsc",
+    "build": "tsc",
     "test": "jest --coverage",
     "posttest": "tslint -p .",
     "docs": "tsc && documentation readme dist/index.js -s API"
@@ -28,12 +36,12 @@
     "tslint": "*",
     "typescript": "*"
   },
-  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/eoscafe/light-api.git"
   },
   "bugs": {
     "url": "https://github.com/eoscafe/light-api/issues"
-  }
+  },
+  "gitHead": "a1affc3ddd1c5626ac56d9e02a29a31683edea6d"
 }
