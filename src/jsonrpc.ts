@@ -29,7 +29,19 @@ const chainToEndpoint: StringTMap<string> = {
   instar: "https://lightapi.eosamsterdam.net",
   xec: "https://lightapi.eosamsterdam.net",
   worbli: "https://lightapi.eosamsterdam.net",
+  coffe: "https://hyperion.coffe.io",
+  proton: "https://testnet-lightapi.eosams.xeos.me",
+  waxtest: "https://testnet-lightapi.eosams.xeos.me",
+  protontest: "https://testnet-lightapi.eosams.xeos.me",
+  telostest: "https://testnet-lightapi.eosams.xeos.me",
 };
+const keyEndpoints = [
+  "https://api.light.xeos.me",
+  "https://lightapi.eosgeneva.io",
+  "https://lightapi.eosamsterdam.net",
+  "https://hyperion.coffe.io",
+  "https://testnet-lightapi.eosams.xeos.me"
+];
 
 /**
  * JsonRpc
@@ -64,10 +76,10 @@ export class JsonRpc {
    *
    * @private
    */
-  public async get<T>(path: string): Promise<T> {
+  public async get<T>(path: string, endpoint: string = this.endpoint): Promise<T> {
     let response;
     let json;
-    const url = this.endpoint + path;
+    const url = endpoint + path;
 
     try {
       const f = this.fetchBuiltin;
@@ -145,9 +157,12 @@ export class JsonRpc {
    * @param {string} key public key
    * @returns {Promise<GetKeyAccounts>} accounts
    */
-  public get_key_accounts(key: string) {
-    const url = `${GET_KEY_ACCOUNTS}/${key}`;
-    return this.get<GetKeyAccounts>(url);
+  public async get_key_accounts(key: string): Promise<GetKeyAccounts[]> {
+    const promises = keyEndpoints.map(endpoint => {
+      const url = `${GET_KEY_ACCOUNTS}/${key}`;
+      return this.get<GetKeyAccounts>(url, endpoint);
+    })
+    return await Promise.all(promises)
   }
 
   /**

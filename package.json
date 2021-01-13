@@ -1,10 +1,6 @@
 {
   "name": "@eoscafe/light-api",
-<<<<<<< HEAD
-  "version": "1.0.0",
-=======
-  "version": "3.2.4",
->>>>>>> 9b1dbf1992b305852f421f20624ff4abddb183b2
+  "version": "3.2.9",
   "description": "Light API HTTP Javascript library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
