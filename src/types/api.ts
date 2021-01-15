@@ -35,8 +35,8 @@ export interface GetKeyAccounts {
 export type GetNetworks = ChainInfo[];
 export type GetTopHolders = string[][];
 
-export type GetTopRam = Array<Array<(string|number)>>;
-export type GetTopStake = Array<Array<(string|number|number)>>;
+export type GetTopRam = (string|number)[][];
+export type GetTopStake = (string|number|number)[][];
 
 export interface GetCodehash {
     [key: string]: {
