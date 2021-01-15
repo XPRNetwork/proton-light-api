@@ -21,19 +21,23 @@ declare const global: any;
 
 interface StringTMap<T> { [key: string]: T; }
 const chainToEndpoint: StringTMap<string> = {
-  telos: "https://api.light.xeos.me",
   eos: "https://api.light.xeos.me",
+  telos: "https://api.light.xeos.me",
+
   jungle: "https://lightapi.eosgeneva.io",
+
   bos: "https://lightapi.eosamsterdam.net",
-  wax: "https://lightapi.eosamsterdam.net",
   instar: "https://lightapi.eosamsterdam.net",
-  xec: "https://lightapi.eosamsterdam.net",
+  proton: "https://lightapi.eosamsterdam.net",
+  wax: "https://lightapi.eosamsterdam.net",
   worbli: "https://lightapi.eosamsterdam.net",
-  coffe: "https://hyperion.coffe.io",
-  proton: "https://testnet-lightapi.eosams.xeos.me",
-  waxtest: "https://testnet-lightapi.eosams.xeos.me",
+  xec: "https://lightapi.eosamsterdam.net",
+  
   protontest: "https://testnet-lightapi.eosams.xeos.me",
   telostest: "https://testnet-lightapi.eosams.xeos.me",
+  waxtest: "https://testnet-lightapi.eosams.xeos.me",
+
+  coffe: "https://hyperion.coffe.io",
 };
 const keyEndpoints = [
   "https://api.light.xeos.me",
@@ -58,9 +62,13 @@ export class JsonRpc {
   public fetchBuiltin: Fetch;
 
   constructor(chain: string, args: { fetch?: Fetch, endpoint?: string } = {}) {
-    this.chain = chain || "eos";
-    this.endpoint = args.endpoint || chainToEndpoint[chain] || chainToEndpoint.eos;
+    this.chain = chain;
+    this.endpoint = args.endpoint || chainToEndpoint[chain];
 
+    if (!this.endpoint) {
+      throw new Error(`Chain ${chain} does not have a default endpoint, provide one in args`)
+    }
+    
     if (args.fetch) {
         this.fetchBuiltin = args.fetch;
     } else {
