@@ -33,9 +33,9 @@ const chainToEndpoint: StringTMap<string> = {
   worbli: "https://lightapi.eosamsterdam.net",
   xec: "https://lightapi.eosamsterdam.net",
   
-  ["proton-test"]: "https://testnet-lightapi.eosams.xeos.me",
-  ["telos-test"]: "https://testnet-lightapi.eosams.xeos.me",
-  ["wax-test"]: "https://testnet-lightapi.eosams.xeos.me",
+  protontest: "https://testnet-lightapi.eosams.xeos.me",
+  telostest: "https://testnet-lightapi.eosams.xeos.me",
+  waxtest: "https://testnet-lightapi.eosams.xeos.me",
 
   coffe: "https://hyperion.coffe.io",
 };
