@@ -39,13 +39,6 @@ const chainToEndpoint: StringTMap<string> = {
 
   coffe: "https://hyperion.coffe.io",
 };
-const keyEndpoints = [
-  "https://api.light.xeos.me",
-  "https://lightapi.eosgeneva.io",
-  "https://lightapi.eosamsterdam.net",
-  "https://hyperion.coffe.io",
-  "https://testnet-lightapi.eosams.xeos.me"
-];
 
 /**
  * JsonRpc
@@ -60,8 +53,9 @@ export class JsonRpc {
   public endpoint: string;
   public chain: string;
   public fetchBuiltin: Fetch;
+  public timeout: number = 5000;
 
-  constructor(chain: string, args: { fetch?: Fetch, endpoint?: string } = {}) {
+  constructor(chain: string, args: { fetch?: Fetch, endpoint?: string, timeout?: number } = {}) {
     this.chain = chain;
     this.endpoint = args.endpoint || chainToEndpoint[chain];
 
@@ -70,10 +64,27 @@ export class JsonRpc {
     }
     
     if (args.fetch) {
-        this.fetchBuiltin = args.fetch;
+      this.fetchBuiltin = args.fetch;
     } else {
-        this.fetchBuiltin = (global as any).fetch;
+      this.fetchBuiltin = (global as any).fetch;
     }
+
+    if (args.timeout) {
+      this.timeout = args.timeout;
+    }
+  }
+
+  async fetchWithTimeout(resource: string, options: { [key: string]: any, timeout: number }) {
+    const { timeout } = options;
+    
+    const controller = new AbortController();
+    const id = setTimeout(() => controller.abort(), timeout);
+    const response = await this.fetchBuiltin(resource, {
+      ...(options || {}),
+      signal: controller.signal  
+    });
+    clearTimeout(id);
+    return response;
   }
 
   /**
@@ -90,9 +101,9 @@ export class JsonRpc {
     const url = endpoint + path;
 
     try {
-      const f = this.fetchBuiltin;
-      response = await f(url, {
+      response = await this.fetchWithTimeout(url, {
         method: "GET",
+        timeout: this.timeout
       });
 
       if (response.status !== 200) {
@@ -166,7 +177,7 @@ export class JsonRpc {
    * @returns {Promise<GetKeyAccounts[]>} accounts per network
    */
   public async get_all_key_accounts(key: string): Promise<GetKeyAccounts[]> {
-    const promises = keyEndpoints.map(endpoint => {
+    const promises = [...new Set(Object.values(chainToEndpoint))].map(endpoint => {
       const url = `${GET_KEY_ACCOUNTS}/${key}`;
       return this.get<GetKeyAccounts>(url, endpoint);
     })
