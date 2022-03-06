@@ -15,9 +15,7 @@ import {
 } from "./endpoints";
 import { RpcError, RpcStatusError } from "./rpcerror";
 import { GetAccount, GetBalances, GetKeyAccounts, GetNetworks, GetTopHolders, GetTopRam, GetTopStake, GetCodehash, GetAccountInfo } from "./types/api";
-
-export type Fetch = (url: string | Request, init?: RequestInit) => Promise<Response>;
-declare const global: any;
+import fetch from 'cross-fetch'
 
 interface StringTMap<T> { [key: string]: T; }
 const chainToEndpoint: StringTMap<string> = {
@@ -40,6 +38,20 @@ const chainToEndpoint: StringTMap<string> = {
   coffe: "https://hyperion.coffe.io",
 };
 
+
+async function fetchWithTimeout(resource: string, options: { [key: string]: any, timeout: number }) {
+  const { timeout } = options;
+  
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+  const response = await fetch(resource, {
+    ...(options || {}),
+    signal: controller.signal  
+  });
+  clearTimeout(id);
+  return response;
+}
+
 /**
  * JsonRpc
  *
@@ -52,39 +64,19 @@ const chainToEndpoint: StringTMap<string> = {
 export class JsonRpc {
   public endpoint: string;
   public chain: string;
-  public fetchBuiltin: Fetch;
   public timeout: number = 5000;
 
-  constructor(chain: string, args: { fetch?: Fetch, endpoint?: string, timeout?: number } = {}) {
+  constructor(chain: string, args: { endpoint?: string, timeout?: number } = {}) {
     this.chain = chain;
     this.endpoint = args.endpoint || chainToEndpoint[chain];
 
     if (!this.endpoint) {
       throw new Error(`Chain ${chain} does not have a default endpoint, provide one in args`)
     }
-    
-    if (args.fetch) {
-      this.fetchBuiltin = args.fetch;
-    } else {
-      this.fetchBuiltin = (global as any).fetch;
-    }
 
     if (args.timeout) {
       this.timeout = args.timeout;
     }
-  }
-
-  async fetchWithTimeout(resource: string, options: { [key: string]: any, timeout: number }) {
-    const { timeout } = options;
-    
-    const controller = new AbortController();
-    const id = setTimeout(() => controller.abort(), timeout);
-    const response = await this.fetchBuiltin(resource, {
-      ...(options || {}),
-      signal: controller.signal  
-    });
-    clearTimeout(id);
-    return response;
   }
 
   /**
@@ -101,7 +93,7 @@ export class JsonRpc {
     const url = endpoint + path;
 
     try {
-      response = await this.fetchWithTimeout(url, {
+      response = await fetchWithTimeout(url, {
         method: "GET",
         timeout: this.timeout
       });
