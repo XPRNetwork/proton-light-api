@@ -1,6 +1,6 @@
 {
   "name": "@eoscafe/light-api",
-  "version": "3.2.17",
+  "version": "3.2.18",
   "description": "Light API HTTP Javascript library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -39,5 +39,8 @@
   "bugs": {
     "url": "https://github.com/eoscafe/light-api/issues"
   },
-  "gitHead": "a1affc3ddd1c5626ac56d9e02a29a31683edea6d"
+  "gitHead": "a1affc3ddd1c5626ac56d9e02a29a31683edea6d",
+  "dependencies": {
+    "cross-fetch": "^3.1.5"
+  }
 }
