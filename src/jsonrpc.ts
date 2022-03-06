@@ -165,7 +165,7 @@ export class JsonRpc {
    * @param {string} key public key
    * @returns {Promise<GetKeyAccounts[]>} accounts per network
    */
-  public async get_key_accounts(key: string): Promise<GetKeyAccounts[]> {
+  public async get_all_key_accounts(key: string): Promise<GetKeyAccounts[]> {
     const promises = keyEndpoints.map(endpoint => {
       const url = `${GET_KEY_ACCOUNTS}/${key}`;
       return this.get<GetKeyAccounts>(url, endpoint);
@@ -181,7 +181,7 @@ export class JsonRpc {
    * @param {string} key public key
    * @returns {Promise<GetKeyAccounts>} accounts
    */
-  public async get_network_key_accounts(key: string): Promise<GetKeyAccounts> {
+  public async get_key_accounts(key: string): Promise<GetKeyAccounts> {
     const url = `${GET_KEY_ACCOUNTS}/${key}`;
     return this.get<GetKeyAccounts>(url);
   }
