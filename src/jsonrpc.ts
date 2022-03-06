@@ -28,7 +28,7 @@ const chainToEndpoint: StringTMap<string> = {
 
   bos: "https://lightapi.eosamsterdam.net",
   instar: "https://lightapi.eosamsterdam.net",
-  proton: "https://lightapi.eosamsterdam.net",
+  proton: "https://proton.light-api.net",
   wax: "https://lightapi.eosamsterdam.net",
   worbli: "https://lightapi.eosamsterdam.net",
   xec: "https://lightapi.eosamsterdam.net",
@@ -163,7 +163,7 @@ export class JsonRpc {
    * Retrieve all accounts in all known EOS networks dependent on a public key:
    *
    * @param {string} key public key
-   * @returns {Promise<GetKeyAccounts>} accounts
+   * @returns {Promise<GetKeyAccounts[]>} accounts per network
    */
   public async get_key_accounts(key: string): Promise<GetKeyAccounts[]> {
     const promises = keyEndpoints.map(endpoint => {
@@ -172,6 +172,20 @@ export class JsonRpc {
     })
     return await Promise.all(promises)
   }
+
+  /**
+   * [GET /api/key]
+   *
+   * Retrieve all accounts in network
+   *
+   * @param {string} key public key
+   * @returns {Promise<GetKeyAccounts>} accounts
+   */
+  public async get_network_key_accounts(key: string): Promise<GetKeyAccounts> {
+    const url = `${GET_KEY_ACCOUNTS}/${key}`;
+    return this.get<GetKeyAccounts>(url);
+  }
+
 
   /**
    * [GET /api/networks]
