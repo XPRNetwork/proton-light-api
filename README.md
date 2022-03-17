@@ -20,20 +20,14 @@ npm install --save @eoscafe/light-api
 
 ```js
 const { JsonRpc } = require("@eoscafe/light-api")
-const fetch = require("isomorphic-fetch")
-
-const endpoint = "https://api.light.xeos.me"
-const rpc = new JsonRpc(endpoint, { fetch, chain: "eos" })
+const rpc = new JsonRpc("proton")
 ```
 
 **TypeScript**
 
 ```ts
 import { JsonRpc } from "@eoscafe/light-api"
-import fetch from "isomorphic-fetch"
-
-const endpoint = "https://api.light.xeos.me"
-const rpc = new JsonRpc(endpoint, { fetch, chain: "eos" })
+const rpc = new JsonRpc("proton")
 ```
 
 ## API
@@ -51,47 +45,51 @@ const rpc = new JsonRpc(endpoint, { fetch, chain: "eos" })
         -   [Parameters](#parameters-2)
     -   [get_balances](#get_balances)
         -   [Parameters](#parameters-3)
-    -   [get_key_accounts](#get_key_accounts)
+    -   [get_all_key_accounts](#get_all_key_accounts)
         -   [Parameters](#parameters-4)
+    -   [get_key_accounts](#get_key_accounts)
+        -   [Parameters](#parameters-5)
     -   [get_networks](#get_networks)
     -   [get_sync_info](#get_sync_info)
     -   [get_token_balance](#get_token_balance)
-        -   [Parameters](#parameters-5)
-    -   [get_topholders](#get_topholders)
         -   [Parameters](#parameters-6)
+    -   [get_topholders](#get_topholders)
+        -   [Parameters](#parameters-7)
     -   [get_usercount](#get_usercount)
     -   [get_topram](#get_topram)
-        -   [Parameters](#parameters-7)
-    -   [get_topstake](#get_topstake)
         -   [Parameters](#parameters-8)
-    -   [get_codehash](#get_codehash)
+    -   [get_topstake](#get_topstake)
         -   [Parameters](#parameters-9)
-    -   [get_tokenholder_count](#get_tokenholder_count)
+    -   [get_codehash](#get_codehash)
         -   [Parameters](#parameters-10)
+    -   [get_tokenholder_count](#get_tokenholder_count)
+        -   [Parameters](#parameters-11)
 -   [JsonRpc](#jsonrpc-1)
     -   [get_account](#get_account-1)
-        -   [Parameters](#parameters-11)
-    -   [get_account_info](#get_account_info-1)
         -   [Parameters](#parameters-12)
-    -   [get_balances](#get_balances-1)
+    -   [get_account_info](#get_account_info-1)
         -   [Parameters](#parameters-13)
-    -   [get_key_accounts](#get_key_accounts-1)
+    -   [get_balances](#get_balances-1)
         -   [Parameters](#parameters-14)
+    -   [get_all_key_accounts](#get_all_key_accounts-1)
+        -   [Parameters](#parameters-15)
+    -   [get_key_accounts](#get_key_accounts-1)
+        -   [Parameters](#parameters-16)
     -   [get_networks](#get_networks-1)
     -   [get_sync_info](#get_sync_info-1)
     -   [get_token_balance](#get_token_balance-1)
-        -   [Parameters](#parameters-15)
+        -   [Parameters](#parameters-17)
     -   [get_topholders](#get_topholders-1)
-        -   [Parameters](#parameters-16)
+        -   [Parameters](#parameters-18)
     -   [get_usercount](#get_usercount-1)
     -   [get_topram](#get_topram-1)
-        -   [Parameters](#parameters-17)
-    -   [get_topstake](#get_topstake-1)
-        -   [Parameters](#parameters-18)
-    -   [get_codehash](#get_codehash-1)
         -   [Parameters](#parameters-19)
-    -   [get_tokenholder_count](#get_tokenholder_count-1)
+    -   [get_topstake](#get_topstake-1)
         -   [Parameters](#parameters-20)
+    -   [get_codehash](#get_codehash-1)
+        -   [Parameters](#parameters-21)
+    -   [get_tokenholder_count](#get_tokenholder_count-1)
+        -   [Parameters](#parameters-22)
 -   [Error](#error)
 -   [Error](#error-1)
 
@@ -106,8 +104,7 @@ JsonRpc
 #### Examples
 
 ```javascript
-const endpoint = "https://api.light.xeos.me"
-const rpc = new JsonRpc(endpoint, { fetch, chain: "eos" })
+const rpc = new JsonRpc("proton")
 ```
 
 #### get_account
@@ -146,11 +143,23 @@ Retrieve only token balances for an account
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetBalances>** balances
 
-#### get_key_accounts
+#### get_all_key_accounts
 
 [GET /api/key]
 
 Retrieve all accounts in all known EOS networks dependent on a public key:
+
+##### Parameters
+
+-   `key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** public key
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;GetKeyAccounts>>** accounts per network
+
+#### get_key_accounts
+
+[GET /api/key]
+
+Retrieve all accounts in network
 
 ##### Parameters
 
@@ -298,11 +307,23 @@ Retrieve only token balances for an account
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;GetBalances>** balances
 
-#### get_key_accounts
+#### get_all_key_accounts
 
 [GET /api/key]
 
 Retrieve all accounts in all known EOS networks dependent on a public key:
+
+##### Parameters
+
+-   `key` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** public key
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)&lt;GetKeyAccounts>>** accounts per network
+
+#### get_key_accounts
+
+[GET /api/key]
+
+Retrieve all accounts in network
 
 ##### Parameters
 

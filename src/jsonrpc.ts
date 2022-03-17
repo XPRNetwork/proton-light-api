@@ -15,7 +15,7 @@ import {
 } from "./endpoints";
 import { RpcError, RpcStatusError } from "./rpcerror";
 import { GetAccount, GetBalances, GetKeyAccounts, GetNetworks, GetTopHolders, GetTopRam, GetTopStake, GetCodehash, GetAccountInfo } from "./types/api";
-import fetch from 'cross-fetch'
+import fetch from "cross-fetch";
 
 interface StringTMap<T> { [key: string]: T; }
 const chainToEndpoint: StringTMap<string> = {
@@ -30,7 +30,7 @@ const chainToEndpoint: StringTMap<string> = {
   wax: "https://lightapi.eosamsterdam.net",
   worbli: "https://lightapi.eosamsterdam.net",
   xec: "https://lightapi.eosamsterdam.net",
-  
+
   protontest: "https://testnet-lightapi.eosams.xeos.me",
   telostest: "https://testnet-lightapi.eosams.xeos.me",
   waxtest: "https://testnet-lightapi.eosams.xeos.me",
@@ -38,15 +38,14 @@ const chainToEndpoint: StringTMap<string> = {
   coffe: "https://hyperion.coffe.io",
 };
 
-
 async function fetchWithTimeout(resource: string, options: { [key: string]: any, timeout: number }) {
   const { timeout } = options;
-  
+
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
   const response = await fetch(resource, {
     ...(options || {}),
-    signal: controller.signal  
+    signal: controller.signal,
   });
   clearTimeout(id);
   return response;
@@ -58,8 +57,7 @@ async function fetchWithTimeout(resource: string, options: { [key: string]: any,
  * @param {string} endpoint LIGHT API endpoint
  * @example
  *
- * const endpoint = "https://api.light.xeos.me"
- * const rpc = new JsonRpc(endpoint, { fetch, chain: "eos" })
+ * const rpc = new JsonRpc("proton")
  */
 export class JsonRpc {
   public endpoint: string;
@@ -71,7 +69,7 @@ export class JsonRpc {
     this.endpoint = args.endpoint || chainToEndpoint[chain];
 
     if (!this.endpoint) {
-      throw new Error(`Chain ${chain} does not have a default endpoint, provide one in args`)
+      throw new Error(`Chain ${chain} does not have a default endpoint, provide one in args`);
     }
 
     if (args.timeout) {
@@ -95,7 +93,7 @@ export class JsonRpc {
     try {
       response = await fetchWithTimeout(url, {
         method: "GET",
-        timeout: this.timeout
+        timeout: this.timeout,
       });
 
       if (response.status !== 200) {
@@ -169,11 +167,11 @@ export class JsonRpc {
    * @returns {Promise<GetKeyAccounts[]>} accounts per network
    */
   public async get_all_key_accounts(key: string): Promise<GetKeyAccounts[]> {
-    const promises = [...new Set(Object.values(chainToEndpoint))].map(endpoint => {
+    const promises = [...new Set(Object.values(chainToEndpoint))].map((endpoint) => {
       const url = `${GET_KEY_ACCOUNTS}/${key}`;
       return this.get<GetKeyAccounts>(url, endpoint);
-    })
-    return await Promise.all(promises)
+    });
+    return await Promise.all(promises);
   }
 
   /**
@@ -188,7 +186,6 @@ export class JsonRpc {
     const url = `${GET_KEY_ACCOUNTS}/${key}`;
     return this.get<GetKeyAccounts>(url);
   }
-
 
   /**
    * [GET /api/networks]
