@@ -1,7 +1,6 @@
-import fetch from "isomorphic-fetch";
 import { JsonRpc } from "../";
 
-const rpc = new JsonRpc("eos", { fetch });
+const rpc = new JsonRpc("eos");
 
 test("jsonrpc.get_account", async () => {
     const response = await rpc.get_account("eoscafeblock");
