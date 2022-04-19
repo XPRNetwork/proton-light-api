@@ -1,5 +1,5 @@
 {
-  "name": "@eoscafe/light-api",
+  "name": "@proton/light-api",
   "version": "3.2.18",
   "description": "Light API HTTP Javascript library",
   "main": "dist/index.js",

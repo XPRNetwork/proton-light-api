@@ -5,13 +5,13 @@
 Using Yarn:
 
 ```bash
-yarn add @eoscafe/light-api
+yarn add @proton/light-api
 ```
 
 or using NPM:
 
 ```bash
-npm install --save @eoscafe/light-api
+npm install --save @proton/light-api
 ```
 
 ## Quick Start
@@ -19,14 +19,14 @@ npm install --save @eoscafe/light-api
 **CommonJS**
 
 ```js
-const { JsonRpc } = require("@eoscafe/light-api")
+const { JsonRpc } = require("@proton/light-api")
 const rpc = new JsonRpc("proton")
 ```
 
 **TypeScript**
 
 ```ts
-import { JsonRpc } from "@eoscafe/light-api"
+import { JsonRpc } from "@proton/light-api"
 const rpc = new JsonRpc("proton")
 ```
 
