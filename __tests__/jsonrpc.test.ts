@@ -1,24 +1,24 @@
 import { JsonRpc } from "../";
 
-const rpc = new JsonRpc("eos");
+const rpc = new JsonRpc("proton");
 
 test("jsonrpc.get_account", async () => {
-    const response = await rpc.get_account("eoscafeblock");
+    const response = await rpc.get_account("cafe");
     expect(!!response).toBeTruthy();
 });
 
 test("jsonrpc.get_account_info", async () => {
-    const response = await rpc.get_account_info("eoscafeblock");
+    const response = await rpc.get_account_info("cafe");
     expect(!!response).toBeTruthy();
 });
 
 test("jsonrpc.get_balances", async () => {
-    const response = await rpc.get_balances("eoscafeblock");
+    const response = await rpc.get_balances("cafe");
     expect(!!response).toBeTruthy();
 });
 
 test("jsonrpc.get_key_accounts", async () => {
-    const response = await rpc.get_key_accounts("EOS82ikCtYKDjPLADUYub3HDFNLGbmmcYerRrAV5CAgDSdNsbR1rK");
+    const response = await rpc.get_key_accounts("PUB_K1_83HZEdUFuB5krCYLHSosMUuguxYh7QhwbHZDYBwsLAyuhxjDpr");
     expect(!!response).toBeTruthy();
 });
 
@@ -33,12 +33,12 @@ test("jsonrpc.get_sync_info", async () => {
 });
 
 test("jsonrpc.get_token_balance", async () => {
-    const response = await rpc.get_token_balance("eoscafeblock", "eosio.token", "EOS");
+    const response = await rpc.get_token_balance("cafe", "eosio.token", "XPR");
     expect(!!response).toBeTruthy();
 });
 
 test("jsonrpc.get_topholders", async () => {
-    const response = await rpc.get_topholders("thepeostoken", "PEOS", 100);
+    const response = await rpc.get_topholders("xtokens", "XUSDC", 100);
     expect(!!response).toBeTruthy();
 });
 
@@ -63,21 +63,21 @@ test("jsonrpc.get_codehash", async () => {
 });
 
 test("jsonrpc.get_tokenholder_count", async () => {
-    const response = await rpc.get_tokenholder_count("eosio.token", "EOS");
+    const response = await rpc.get_tokenholder_count("eosio.token", "XPR");
     expect(!!response).toBeTruthy();
 });
 
 test("jsonrpc.get_token_holders", async () => {
     jest.setTimeout(30000);
 
-    const response = await rpc.get_token_holders("tethertether", "USDT");
+    const response = await rpc.get_token_holders("xtokens", "XMT");
     expect(response.length).toBeTruthy();
 });
 
 test("jsonrpc.get_accounts_from_keys", async () => {
     jest.setTimeout(30000);
 
-    const response = await rpc.get_accounts_from_keys(["PUB_K1_83HZEdUFuB5krCYLHSosMUuguxYh7QhwbHZDYBwsLAyuhxjDpr"]);
+    const response = await rpc.get_accounts_from_keys(["PUB_K1_7E8WQukJcKnvaRaTJYnd69T1Fg3daChpAjMGi2CZNE3vczGNei"]);
     expect(response.length).toBeTruthy();
 
     rpc.wsClient.disconnect()
