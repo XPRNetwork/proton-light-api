@@ -15,7 +15,8 @@
 
     "skipLibCheck": true,
 
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "useUnknownInCatchVariables": false
   },
   "types" : ["jest"],
   "files": ["index.ts"]
