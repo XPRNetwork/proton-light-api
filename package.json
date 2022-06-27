@@ -1,6 +1,6 @@
 {
   "name": "@proton/light-api",
-  "version": "3.2.18",
+  "version": "3.3.0",
   "description": "Light API HTTP Javascript library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,7 @@
     "docs": "tsc && documentation readme dist/index.js -s API"
   },
   "author": "Syed Jafri <syed.jafri2@ucalgary.ca>",
-  "homepage": "https://github.com/eoscafe/light-api",
+  "homepage": "https://github.com/ProtonProtocol/light-api",
   "license": "MIT",
   "devDependencies": {
     "@types/isomorphic-fetch": "*",
@@ -30,17 +30,18 @@
     "ts-jest": "*",
     "ts-node": "*",
     "tslint": "*",
-    "typescript": "*"
+    "typescript": "4.7.4"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eoscafe/light-api.git"
+    "url": "git+https://github.com/ProtonProtocol/light-api.git"
   },
   "bugs": {
-    "url": "https://github.com/eoscafe/light-api/issues"
+    "url": "https://github.com/ProtonProtocol/light-api/issues"
   },
   "gitHead": "a1affc3ddd1c5626ac56d9e02a29a31683edea6d",
   "dependencies": {
-    "cross-fetch": "^3.1.5"
+    "cross-fetch": "^3.1.5",
+    "jsonrpc2-ws": "^1.0.0-beta23"
   }
 }
