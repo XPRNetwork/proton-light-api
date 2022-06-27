@@ -11,3 +11,6 @@ export const GET_TOPRAM = "/api/topram";
 export const GET_TOPSTAKE = "/api/topstake";
 export const GET_CODEHASH = "/api/codehash";
 export const GET_TOKEN_HOLDER_COUNT = "/api/holdercount";
+
+export const GET_TOKEN_HOLDERS = "get_token_holders";
+export const GET_ACCOUNTS_FROM_KEYS = "get_accounts_from_keys";

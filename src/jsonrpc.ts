@@ -12,10 +12,14 @@ import {
   GET_CODEHASH,
   GET_TOKEN_HOLDER_COUNT,
   GET_ACCOUNT_INFO,
+  GET_TOKEN_HOLDERS,
+  GET_ACCOUNTS_FROM_KEYS,
 } from "./endpoints";
 import { RpcError, RpcStatusError } from "./rpcerror";
 import { GetAccount, GetBalances, GetKeyAccounts, GetNetworks, GetTopHolders, GetTopRam, GetTopStake, GetCodehash, GetAccountInfo } from "./types/api";
+import { AccountPermRow, BalanceRow } from "./types/wsapi"
 import fetch from "cross-fetch";
+import { Client } from 'jsonrpc2-ws';
 
 interface StringTMap<T> { [key: string]: T; }
 const chainToEndpoint: StringTMap<string> = {
@@ -63,10 +67,13 @@ export class JsonRpc {
   public endpoint: string;
   public chain: string;
   public timeout: number = 5000;
+  public wsClient: Client;
+  public wsRequestId: number = 100;
 
   constructor(chain: string, args: { endpoint?: string, timeout?: number } = {}) {
     this.chain = chain;
     this.endpoint = args.endpoint || chainToEndpoint[chain];
+    this.wsClient = new Client(this.endpoint.replace('https:', 'wss:') + '/wsapi')
 
     if (!this.endpoint) {
       throw new Error(`Chain ${chain} does not have a default endpoint, provide one in args`);
@@ -308,5 +315,92 @@ export class JsonRpc {
   public get_tokenholder_count(contract: string, token: string) {
     const url = `${GET_TOKEN_HOLDER_COUNT}/${this.chain}/${contract}/${token}`;
     return this.get<number>(url);
+  }
+
+  /**
+   * [WS get_token_holders]
+   *
+   * Get all token holders of a contract and symbol
+   *
+   * @param contract token contract
+   * @param token token symbol
+   * @returns
+   */
+  public get_token_holders(
+    contract: string,
+    token: string
+  ): Promise<BalanceRow[]> {
+    const reqId = ++this.wsRequestId
+    const balances: BalanceRow[] = [];
+
+    return new Promise((resolve, reject) => {
+      this.wsClient.on('error', (err) => reject(err))
+
+      this.wsClient.methods.set('reqdata', (_: any, params: { end: boolean, data: { account: string; amount: string; }}) => {
+        if (params.end) {
+          resolve(balances);
+        }
+
+        balances.push({
+          account: params.data.account,
+          amount: +params.data.amount,
+        });
+      });
+
+      try {
+        this.wsClient.call(GET_TOKEN_HOLDERS, {
+          reqid: reqId,
+          network: this.chain,
+          contract,
+          currency: token,
+        });
+      } catch (err) {
+        reject(err)
+        return;
+      }
+    });
+  }
+
+  /**
+   * [WS get_accounts_from_keys]
+   *
+   * Get all token holders of a contract and symbol
+   *
+   * @param keys[] array of keys
+   * @returns
+   */
+   public get_accounts_from_keys(
+    keys: string[],
+  ): Promise<AccountPermRow[]> {
+    const reqId = ++this.wsRequestId
+    const accounts: AccountPermRow[] = [];
+
+    return new Promise((resolve, reject) => {
+      this.wsClient.on('error', (err) => reject(err))
+
+      this.wsClient.methods.set('reqdata', (_: any, params: { end: boolean, data: { account_name: string; perm: string; weight: string; pubkey: string }}) => {
+        if (params.end) {
+          resolve(accounts);
+        }
+
+        accounts.push({
+          account_name: params.data.account_name,
+          perm: params.data.perm,
+          weight: +params.data.weight,
+          pubkey: params.data.pubkey,
+        });
+      });
+
+      try {
+        this.wsClient.call(GET_ACCOUNTS_FROM_KEYS, {
+          reqid: reqId,
+          network: this.chain,
+          keys,
+        });
+      } catch (err) {
+        reject(err)
+        return;
+      }
+    });
   }
 }

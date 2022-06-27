@@ -66,3 +66,19 @@ test("jsonrpc.get_tokenholder_count", async () => {
     const response = await rpc.get_tokenholder_count("eosio.token", "EOS");
     expect(!!response).toBeTruthy();
 });
+
+test("jsonrpc.get_token_holders", async () => {
+    jest.setTimeout(30000);
+
+    const response = await rpc.get_token_holders("tethertether", "USDT");
+    expect(response.length).toBeTruthy();
+});
+
+test("jsonrpc.get_accounts_from_keys", async () => {
+    jest.setTimeout(30000);
+
+    const response = await rpc.get_accounts_from_keys(["PUB_K1_83HZEdUFuB5krCYLHSosMUuguxYh7QhwbHZDYBwsLAyuhxjDpr"]);
+    expect(response.length).toBeTruthy();
+
+    rpc.wsClient.disconnect()
+});
