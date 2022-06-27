@@ -64,32 +64,40 @@ const rpc = new JsonRpc("proton")
         -   [Parameters](#parameters-10)
     -   [get_tokenholder_count](#get_tokenholder_count)
         -   [Parameters](#parameters-11)
+    -   [get_token_holders](#get_token_holders)
+        -   [Parameters](#parameters-12)
+    -   [get_accounts_from_keys](#get_accounts_from_keys)
+        -   [Parameters](#parameters-13)
 -   [JsonRpc](#jsonrpc-1)
     -   [get_account](#get_account-1)
-        -   [Parameters](#parameters-12)
-    -   [get_account_info](#get_account_info-1)
-        -   [Parameters](#parameters-13)
-    -   [get_balances](#get_balances-1)
         -   [Parameters](#parameters-14)
-    -   [get_all_key_accounts](#get_all_key_accounts-1)
+    -   [get_account_info](#get_account_info-1)
         -   [Parameters](#parameters-15)
-    -   [get_key_accounts](#get_key_accounts-1)
+    -   [get_balances](#get_balances-1)
         -   [Parameters](#parameters-16)
+    -   [get_all_key_accounts](#get_all_key_accounts-1)
+        -   [Parameters](#parameters-17)
+    -   [get_key_accounts](#get_key_accounts-1)
+        -   [Parameters](#parameters-18)
     -   [get_networks](#get_networks-1)
     -   [get_sync_info](#get_sync_info-1)
     -   [get_token_balance](#get_token_balance-1)
-        -   [Parameters](#parameters-17)
+        -   [Parameters](#parameters-19)
     -   [get_topholders](#get_topholders-1)
-        -   [Parameters](#parameters-18)
+        -   [Parameters](#parameters-20)
     -   [get_usercount](#get_usercount-1)
     -   [get_topram](#get_topram-1)
-        -   [Parameters](#parameters-19)
-    -   [get_topstake](#get_topstake-1)
-        -   [Parameters](#parameters-20)
-    -   [get_codehash](#get_codehash-1)
         -   [Parameters](#parameters-21)
-    -   [get_tokenholder_count](#get_tokenholder_count-1)
+    -   [get_topstake](#get_topstake-1)
         -   [Parameters](#parameters-22)
+    -   [get_codehash](#get_codehash-1)
+        -   [Parameters](#parameters-23)
+    -   [get_tokenholder_count](#get_tokenholder_count-1)
+        -   [Parameters](#parameters-24)
+    -   [get_token_holders](#get_token_holders-1)
+        -   [Parameters](#parameters-25)
+    -   [get_accounts_from_keys](#get_accounts_from_keys-1)
+        -   [Parameters](#parameters-26)
 -   [Error](#error)
 -   [Error](#error-1)
 
@@ -269,6 +277,28 @@ returns a plaintext integer indicating the number of accounts with positive bala
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)>** count
 
+#### get_token_holders
+
+[WS get_token_holders]
+
+Get all token holders of a contract and symbol
+
+##### Parameters
+
+-   `contract`  token contract
+-   `token`  token symbol
+
+#### get_accounts_from_keys
+
+[WS get_accounts_from_keys]
+
+Get all token holders of a contract and symbol
+
+##### Parameters
+
+-   `keys`  
+-   `keys[]`  array of keys
+
 ### JsonRpc
 
 #### get_account
@@ -432,6 +462,28 @@ returns a plaintext integer indicating the number of accounts with positive bala
 -   `token` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** token symbol
 
 Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)&lt;[number](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number)>** count
+
+#### get_token_holders
+
+[WS get_token_holders]
+
+Get all token holders of a contract and symbol
+
+##### Parameters
+
+-   `contract`  token contract
+-   `token`  token symbol
+
+#### get_accounts_from_keys
+
+[WS get_accounts_from_keys]
+
+Get all token holders of a contract and symbol
+
+##### Parameters
+
+-   `keys`  
+-   `keys[]`  array of keys
 
 ### Error
 
