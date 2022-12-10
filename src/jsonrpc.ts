@@ -23,8 +23,8 @@ import { Client } from 'jsonrpc2-ws';
 
 interface StringTMap<T> { [key: string]: T; }
 const chainToEndpoint: StringTMap<string> = {
-  eos: "https://api.light.xeos.me",
-  telos: "https://api.light.xeos.me",
+  eos: "https://eos.light-api.net",
+  telos: "https://telos.light-api.net",
 
   jungle: "https://lightapi.eosgeneva.io",
 
