@@ -67,13 +67,13 @@ export class JsonRpc {
   public endpoint: string;
   public chain: string;
   public timeout: number = 5000;
-  public wsClient: Client;
+  // public wsClient: Client;
   public wsRequestId: number = 100;
 
   constructor(chain: string, args: { endpoint?: string, timeout?: number } = {}) {
     this.chain = chain;
     this.endpoint = args.endpoint || chainToEndpoint[chain];
-    this.wsClient = new Client(this.endpoint.replace('https:', 'wss:') + '/wsapi')
+    // this.wsClient = new Client(this.endpoint.replace('https:', 'wss:') + '/wsapi')
 
     if (!this.endpoint) {
       throw new Error(`Chain ${chain} does not have a default endpoint, provide one in args`);
@@ -326,40 +326,40 @@ export class JsonRpc {
    * @param token token symbol
    * @returns
    */
-  public get_token_holders(
-    contract: string,
-    token: string
-  ): Promise<BalanceRow[]> {
-    const reqId = ++this.wsRequestId
-    const balances: BalanceRow[] = [];
+  // public get_token_holders(
+  //   contract: string,
+  //   token: string
+  // ): Promise<BalanceRow[]> {
+  //   const reqId = ++this.wsRequestId
+  //   const balances: BalanceRow[] = [];
 
-    return new Promise((resolve, reject) => {
-      this.wsClient.on('error', (err) => reject(err))
+  //   return new Promise((resolve, reject) => {
+  //     this.wsClient.on('error', (err) => reject(err))
 
-      this.wsClient.methods.set('reqdata', (_: any, params: { end: boolean, data: { account: string; amount: string; }}) => {
-        if (params.end) {
-          resolve(balances);
-        }
+  //     this.wsClient.methods.set('reqdata', (_: any, params: { end: boolean, data: { account: string; amount: string; }}) => {
+  //       if (params.end) {
+  //         resolve(balances);
+  //       }
 
-        balances.push({
-          account: params.data.account,
-          amount: +params.data.amount,
-        });
-      });
+  //       balances.push({
+  //         account: params.data.account,
+  //         amount: +params.data.amount,
+  //       });
+  //     });
 
-      try {
-        this.wsClient.call(GET_TOKEN_HOLDERS, {
-          reqid: reqId,
-          network: this.chain,
-          contract,
-          currency: token,
-        });
-      } catch (err) {
-        reject(err)
-        return;
-      }
-    });
-  }
+  //     try {
+  //       this.wsClient.call(GET_TOKEN_HOLDERS, {
+  //         reqid: reqId,
+  //         network: this.chain,
+  //         contract,
+  //         currency: token,
+  //       });
+  //     } catch (err) {
+  //       reject(err)
+  //       return;
+  //     }
+  //   });
+  // }
 
   /**
    * [WS get_accounts_from_keys]
@@ -369,38 +369,38 @@ export class JsonRpc {
    * @param keys[] array of keys
    * @returns
    */
-   public get_accounts_from_keys(
-    keys: string[],
-  ): Promise<AccountPermRow[]> {
-    const reqId = ++this.wsRequestId
-    const accounts: AccountPermRow[] = [];
+  //  public get_accounts_from_keys(
+  //   keys: string[],
+  // ): Promise<AccountPermRow[]> {
+  //   const reqId = ++this.wsRequestId
+  //   const accounts: AccountPermRow[] = [];
 
-    return new Promise((resolve, reject) => {
-      this.wsClient.on('error', (err) => reject(err))
+  //   return new Promise((resolve, reject) => {
+  //     this.wsClient.on('error', (err) => reject(err))
 
-      this.wsClient.methods.set('reqdata', (_: any, params: { end: boolean, data: { account_name: string; perm: string; weight: string; pubkey: string }}) => {
-        if (params.end) {
-          resolve(accounts);
-        }
+  //     this.wsClient.methods.set('reqdata', (_: any, params: { end: boolean, data: { account_name: string; perm: string; weight: string; pubkey: string }}) => {
+  //       if (params.end) {
+  //         resolve(accounts);
+  //       }
 
-        accounts.push({
-          account_name: params.data.account_name,
-          perm: params.data.perm,
-          weight: +params.data.weight,
-          pubkey: params.data.pubkey,
-        });
-      });
+  //       accounts.push({
+  //         account_name: params.data.account_name,
+  //         perm: params.data.perm,
+  //         weight: +params.data.weight,
+  //         pubkey: params.data.pubkey,
+  //       });
+  //     });
 
-      try {
-        this.wsClient.call(GET_ACCOUNTS_FROM_KEYS, {
-          reqid: reqId,
-          network: this.chain,
-          keys,
-        });
-      } catch (err) {
-        reject(err)
-        return;
-      }
-    });
-  }
+  //     try {
+  //       this.wsClient.call(GET_ACCOUNTS_FROM_KEYS, {
+  //         reqid: reqId,
+  //         network: this.chain,
+  //         keys,
+  //       });
+  //     } catch (err) {
+  //       reject(err)
+  //       return;
+  //     }
+  //   });
+  // }
 }
