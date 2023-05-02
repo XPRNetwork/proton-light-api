@@ -10,11 +10,15 @@ export interface Balance {
 
 export interface ChainInfo {
     chainid: string;
-    decimals: string;
-    description: string;
-    network: string;
     production: number;
+    description: string;
+    sync: number;
+    decimals: string;
     systoken: string;
+    rex_enabled: number;
+    block_num: number;
+    network: string;
+    block_time: string;
 }
 
 export interface DelegatedFrom {
